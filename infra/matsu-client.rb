@@ -26,11 +26,6 @@ class MatsuClient
     Nokogiri::HTML.parse(html, nil, charset)
   end
 
-  def put_id_and_pass()
-    puts @id
-    puts @pass
-  end
-
   def login()
     uri = URI.parse(@login_uri)
     http = Net::HTTP.new(uri.host, uri.port)
