@@ -38,7 +38,17 @@ class MatsuClient
                         'passwd' => @pass,
                         'easyTradeFlg' => 0
                       })
-    http.request(req)
+    response = http.request(req)
+    doc = Nokogiri::HTML.parse(response.body)
+    error_message = doc.xpath('//p[@class="m-box-alert-txt"]/strong').inner_text
+    if error_message.empty?
+      puts 'ログイン成功'
+      true
+    else
+      puts 'ログイン失敗'
+      puts error_message
+      false
+    end
   end
 end
 
